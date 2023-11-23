@@ -1,0 +1,53 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<h3>Всі книжки нашої бібліотеки:</h3>
+<table class="table">
+        <thead class="thead-dark">
+        <tr>
+                <th scope="col">#</th>
+                <th scope="col">Назва</th>
+                <th scope="col">Автор</th>
+                <th scope="col">Опис</th>
+                <th scope="col">Кількість</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if books %}
+        {% for el in books %}
+        <tr>
+                <th scope="row">{{ el.id }}</th>
+                <td>{{ el.title }}</td>
+                <td>{{ el.author }}</td>
+                <td>{{ el.text|title|truncatewords:7 }}</td>
+                <td>{{ el.count }}</td>
+                <td>
+                        <a type="button" class="btn btn-light btn-sm"
+                           href="/book/{{ el.id }}/view">
+                                <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/view-2513333-2104657.png?f=webp&w=256" width="24" height="24">
+                        </a>
+                </td>
+                                <td>
+                        <a type="button" class="btn btn-light btn-sm"
+                           href="/book/{{ el.id }}/edit">
+                                <img src="https://icons.veryicon.com/png/o/miscellaneous/linear-small-icon/edit-246.png" width="24" height="24">
+                        </a>
+                </td>
+                                          <td>
+                        <a type="button" class="btn btn-light btn-sm"
+                           href="/book/{{ el.id }}/delete">
+                                <img src="https://cdn-icons-png.flaticon.com/512/3221/3221803.png" width="24" height="24">
+                        </a>
+                </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+</table>
+{% endblock %}
